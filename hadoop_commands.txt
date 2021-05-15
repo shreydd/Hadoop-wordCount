@@ -1,0 +1,37 @@
+## this useless ignore
+hadoop jar share/hadoop/tools/lib/hadoop-streaming-2.10.1.jar -file /user/mapreduce.py -mapper mapreduce.py -file /user/reducer.py -reducer reducer.py -input /user/word.txt -output /user
+##
+
+##
+./mr-jobhistory-daemon.sh start history server
+./yarn-daemon.sh start nodemanager
+./hadoop-daemon.sh start secondarynamenode 
+./yarn-daemon.sh start resourcemanager
+
+mapred job -list all
+
+##
+hdfs dfs -ls /user
+hdfs dfs -chmod go+wx /user/mapreduce.py
+hdfs dfs -chmod go+wx /user/reducer.py
+hdfs dfs -chmod go+wx /user/word.txt
+hdfs dfs -chmod go+wx /user/op.txt
+
+##
+hdfs dfs -rm /user/mapreduce.py
+
+##
+hdfs dfs -put file.txt /user
+
+##
+hdfs dfs -rm -r /directoryuwannaremove
+
+##output working
+hadoop jar share/hadoop/tools/lib/hadoop-streaming-2.10.1.jar -file mapper.py -mapper mapper.py -file reducer.py -reducer reducer.py -input /user/word.txt -output /out
+
+<!-- give an non existing directory name at the end -->
+
+##
+hdfs dfs -cat /out/part-00000
+
+<!-- prints output -->
